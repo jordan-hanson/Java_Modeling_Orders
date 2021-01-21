@@ -1,6 +1,8 @@
 package com.lambdaschool.modelingorders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Agent {
 
@@ -17,9 +19,22 @@ public class Agent {
 
     private String workingarea;
 
+    @OneToMany(mappedBy = "agent",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
+
     public Agent(){}
 
-    public Agent(String name, Double commission, String country, String phone, String workingarea) {
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Agent(String name, String country, Double commission, String phone, String workingarea) {
         this.name = name;
         this.commission = commission;
         this.country = country;
