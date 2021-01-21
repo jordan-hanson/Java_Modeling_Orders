@@ -9,28 +9,29 @@ public class Customer {
     private String custcity;
     private String custcountry;
     private String custname;
+    private String workingarea;
     private String grade;
     private double openingamt;
     private double outstandingamt;
     private double paymentamt;
     private String phone;
     private double receiveamt;
-    private String workingarea;
 
 //    empty public Customer(){} throws an error
 
+    public Customer(){}
 
-    public Customer(String custcity, String custcountry, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea) {
-        this.custcity = custcity;
-        this.custcountry = custcountry;
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt,  double paymentamt, double outstandingamt, String phone) {
         this.custname = custname;
+        this.custcity = custcity;
+        this.workingarea = workingarea;
+        this.custcountry = custcountry;
         this.grade = grade;
         this.openingamt = openingamt;
-        this.outstandingamt = outstandingamt;
-        this.paymentamt = paymentamt;
-        this.phone = phone;
         this.receiveamt = receiveamt;
-        this.workingarea = workingarea;
+        this.paymentamt = paymentamt;
+        this.outstandingamt = outstandingamt;
+        this.phone = phone;
     }
 
     public long getCustcode() {

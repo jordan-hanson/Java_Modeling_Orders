@@ -15,13 +15,16 @@ public class Agent {
 
     private String phone;
 
+    private String workingarea;
+
+    public Agent(){}
 
     public Agent(String name, Double commission, String country, String phone, String workingarea) {
         this.name = name;
         this.commission = commission;
         this.country = country;
         this.phone = phone;
-//        this.workingarea = workingarea;
+        this.workingarea = workingarea;
     }
 
     public long getAgentcode() {
@@ -64,11 +67,11 @@ public class Agent {
         this.phone = phone;
     }
 
-//    public String getWorkingarea() {
-//        return workingarea;
-//    }
-//
-//    public void setWorkingarea(String workingarea) {
-//        this.workingarea = workingarea;
-//    }
+    public String getWorkingarea() {
+        return workingarea;
+    }
+
+    public void setWorkingarea(String workingarea) {
+        this.workingarea = workingarea;
+    }
 }
