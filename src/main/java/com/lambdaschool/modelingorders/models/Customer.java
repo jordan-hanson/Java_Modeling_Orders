@@ -1,9 +1,13 @@
 package com.lambdaschool.modelingorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "customers")
 public class Customer {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO) private long custcode;
@@ -23,11 +27,13 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties(value = "customers", allowSetters = true)
     private Agent agent;
 
     @OneToMany(mappedBy = "customer",
     cascade = CascadeType.ALL,
     orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customer", allowSetters = true)
     private List<Order> orders = new ArrayList<>();
 
     public Customer(){}
