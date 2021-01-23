@@ -8,4 +8,6 @@ public interface OrdersServices {
     Order save(Order order);
 
     List<Order> findAllOrders();
+
+    Order findOrderById(long ordnum);
 }
