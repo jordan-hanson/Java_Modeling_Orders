@@ -1,5 +1,6 @@
 package com.lambdaschool.modelingorders.controllers;
 
+import com.lambdaschool.modelingorders.models.Customer;
 import com.lambdaschool.modelingorders.models.Order;
 import com.lambdaschool.modelingorders.services.OrdersServices;
 import org.apache.coyote.Response;
@@ -21,11 +22,14 @@ public class OrderController {
     @Autowired
     private OrdersServices ordersServices;
 
-    @Autowired
     @GetMapping(value = "/order/orders", produces = "application/json")
     public ResponseEntity<?> findAllOrders() {
         List<Order> orderList = ordersServices.findAllOrders();
         return new ResponseEntity<>(orderList, HttpStatus.OK);
     }
-
+    @GetMapping(value = "/order/orders/{orderid}", produces = "application/json")
+    public ResponseEntity<?> findAllById(@PathVariable long orderid) {
+        Order order = ordersServices.findCustomerById(orderid);
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
 }

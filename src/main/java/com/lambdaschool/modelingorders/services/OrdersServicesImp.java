@@ -31,6 +31,9 @@ public class OrdersServicesImp implements OrdersServices{
         return list;
     }
 
-
-
+    @Override
+    public Order findCustomerById(long orderid) {
+        return ordersRepository.findById(orderid)
+                .orElseThrow(()-> new EntityNotFoundException("Order " + orderid + "Not Found."));
+    }
 }
