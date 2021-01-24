@@ -1,7 +1,13 @@
 package com.lambdaschool.modelingorders.models;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "customers")
 public class Customer {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO) private long custcode;
@@ -19,9 +25,32 @@ public class Customer {
 
 //    empty public Customer(){} throws an error
 
+    @ManyToOne
+    @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties(value = "customers", allowSetters = true)
+    private Agent agent;
+
+    @OneToMany(mappedBy = "customer",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customer", allowSetters = true)
+    private List<Order> orders = new ArrayList<>();
+
     public Customer(){}
 
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt,  double paymentamt, double outstandingamt, String phone) {
+
+    public Customer(String custname,
+                    String custcity,
+                    String workingarea,
+                    String custcountry,
+                    String grade,
+                    double openingamt,
+                    double receiveamt,
+                    double paymentamt,
+                    double outstandingamt,
+                    String phone,
+                    Agent agent)
+    {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -32,6 +61,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
+        this.agent = agent;
     }
 
     public long getCustcode() {
@@ -120,5 +150,19 @@ public class Customer {
 
     public void setWorkingarea(String workingarea) {
         this.workingarea = workingarea;
+    }
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
