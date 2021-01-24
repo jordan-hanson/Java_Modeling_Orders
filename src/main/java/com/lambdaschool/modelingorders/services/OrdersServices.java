@@ -9,5 +9,4 @@ public interface OrdersServices {
 
     List<Order> findAllOrders();
 
-    Order findOrderById(long ordnum);
 }
