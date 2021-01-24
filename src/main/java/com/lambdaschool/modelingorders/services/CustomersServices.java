@@ -10,4 +10,6 @@ public interface CustomersServices {
     List<Customer> findAllOrders();
 
     Customer findCustomerById(long customerid);
+
+//    List<Customer> findByNameLike(String subname);
 }

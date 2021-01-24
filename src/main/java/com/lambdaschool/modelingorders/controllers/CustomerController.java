@@ -13,20 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/customers")
+@RequestMapping(value = "/customer")
 public class CustomerController {
 
     @Autowired
     private CustomersServices customersServices;
 
-    @GetMapping(value = "/orders", produces = "application/json")
+    @GetMapping(value = "/customers", produces = "application/json")
     public ResponseEntity<?> findAllOrders(){
         List<Customer> customerOrderList = customersServices.findAllOrders();
         return new ResponseEntity<>(customerOrderList, HttpStatus.OK);
     }
-    @GetMapping(value = "/customer/{customerid}", produces = "application/json")
+    @GetMapping(value = "/customers/{customerid}", produces = "application/json")
     public ResponseEntity<?> findAllById(@PathVariable long customerid){
         Customer customer = customersServices.findCustomerById(customerid);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
+//    @GetMapping(value = "/customers/likename/{subname}", produces = "application/json")
+//    public ResponseEntity<?> findByNameLike(@PathVariable String subname){
+//        List<Customer> list = customersServices.findByNameLike(subname);
+//        return new ResponseEntity<>(list, HttpStatus.OK);
+//    }
 }
