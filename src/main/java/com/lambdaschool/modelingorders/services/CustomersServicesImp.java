@@ -19,17 +19,12 @@ public class CustomersServicesImp implements CustomersServices{
 
     @Transactional
     @Override
-    public Customer save(Customer customer) {
-        return customersRepository.save(customer);
-    }
-
-    @Override
     public List<Customer> findAllOrders() {
         List<Customer> list = new ArrayList<>();
         customersRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
-
+    @Transactional
     @Override
     public Customer findCustomerById(long customerid) {
         return customersRepository.findById(customerid)
@@ -37,8 +32,24 @@ public class CustomersServicesImp implements CustomersServices{
 
     }
 
-//    @Override
-//    public List<Customer> findByNameLike(String subname) {
-//        return customersRepository.findByNameContainingIgnoringCase(subname);
-//    }
+    @Transactional
+    @Override
+    public Customer save(Customer customer) {
+        Customer newCustomer = customer;
+        
+        return customersRepository.save(newCustomer);
+    }
+
+    @Transactional
+    @Override
+    public Customer update(Customer customer, long id) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void delete(long id) {
+
+    }
+
 }
