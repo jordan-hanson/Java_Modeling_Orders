@@ -18,6 +18,7 @@ public class CustomersServicesImp implements CustomersServices{
     @Autowired
     private CustomersRepository customersRepository;
 
+
     @Transactional
     @Override
     public List<Customer> findAllOrders() {
@@ -60,15 +61,16 @@ public class CustomersServicesImp implements CustomersServices{
 
         newCustomer.setAgent(customer.getAgent());
 
-        newCustomer.getOrders().clear();
-        for (Order o : customer.getOrders()){
-            Order newOrder = new Order();
-            newOrder.setAdvanceamount(o.getAdvanceamount());
-            newOrder.setOrdamount(o.getOrdamount());
-            newOrder.setOrderdescription(o.getOrderdescription());
+            newCustomer.getOrders().clear();
+            for (Order o : customer.getOrders()) {
+                Order newOrder = new Order();
+                newOrder.setAdvanceamount(o.getAdvanceamount());
+                newOrder.setOrdamount(o.getOrdamount());
+                newOrder.setOrderdescription(o.getOrderdescription());
 
-            newCustomer.getOrders().add(newOrder);
-        }
+                newCustomer.getOrders().add(newOrder);
+            }
+
 
         return customersRepository.save(newCustomer);
     }
@@ -89,7 +91,25 @@ public class CustomersServicesImp implements CustomersServices{
         if (customer.getPhone() !=null) updateCustomer.setPhone(customer.getPhone());
         if (customer.hasValueReceiveAmt) updateCustomer.setReceiveamt(customer.getReceiveamt());
 
-        return null;
+        if(customer.getAgent() !=null ){
+            updateCustomer.setAgent(customer.getAgent());
+        }
+
+        if(customer.getOrders().size() > 0){
+            updateCustomer.getOrders().clear();
+
+            for(Order o: customer.getOrders()){
+                Order newOrder = new Order();
+                newOrder.setOrderdescription(o.getOrderdescription());
+                newOrder.setAdvanceamount(o.getAdvanceamount());
+                newOrder.setOrdamount(o.getOrdamount());
+                newOrder.setCustomer(updateCustomer);
+
+                updateCustomer.getOrders().add(newOrder);
+            }
+        }
+
+        return customersRepository.save(updateCustomer);
     }
 
     @Transactional
