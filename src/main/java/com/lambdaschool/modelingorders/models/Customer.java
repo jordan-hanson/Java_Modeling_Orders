@@ -17,17 +17,30 @@ public class Customer {
     private String custname;
     private String workingarea;
     private String grade;
+
     private double openingamt;
+    @Transient
+    public boolean hasValueForOpeningAmt = false;
+
     private double outstandingamt;
+    @Transient
+    public boolean hasValueForOutstandingAmt = false;
+
     private double paymentamt;
+    @Transient
+    public boolean hasValueForPaymentAmt = false;
+
     private String phone;
+
     private double receiveamt;
+    @Transient
+    public boolean hasValueReceiveAmt = false;
 
 //    empty public Customer(){} throws an error
 
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
-    @JsonIgnoreProperties(value = "customers", allowSetters = true)
+    @JsonIgnoreProperties(value = "customers", allowSetters = true )
     private Agent agent;
 
     @OneToMany(mappedBy = "customer",
@@ -105,6 +118,7 @@ public class Customer {
     }
 
     public double getOpeningamt() {
+        hasValueForOpeningAmt = true;
         return openingamt;
     }
 
@@ -113,6 +127,7 @@ public class Customer {
     }
 
     public double getOutstandingamt() {
+        hasValueForOutstandingAmt = true;
         return outstandingamt;
     }
 
@@ -121,6 +136,7 @@ public class Customer {
     }
 
     public double getPaymentamt() {
+        hasValueForPaymentAmt = true;
         return paymentamt;
     }
 
@@ -137,6 +153,7 @@ public class Customer {
     }
 
     public double getReceiveamt() {
+        hasValueReceiveAmt = true;
         return receiveamt;
     }
 
